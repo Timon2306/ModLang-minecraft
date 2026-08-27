@@ -50,6 +50,15 @@ impl TranslationEngine for DeepLEngine {
             return HashMap::new();
         }
 
+        // Проверяем поддержку языка DeepL
+        if target_lang.deepl_code.is_empty() {
+            callbacks.log(
+                format!("❌ DeepL не поддерживает язык «{}». Используйте Google Translate или Gemini для этого языка.", target_lang.label),
+                "red",
+            );
+            return items.into_iter().map(|(k, v)| (k, v.original)).collect();
+        }
+
         let is_free = self.api_key.ends_with(":fx");
         callbacks.log(
             format!(
@@ -59,6 +68,7 @@ impl TranslationEngine for DeepLEngine {
             ),
             "dim",
         );
+
 
         let mut results = HashMap::new();
         let all_keys: Vec<String> = items.keys().cloned().collect();

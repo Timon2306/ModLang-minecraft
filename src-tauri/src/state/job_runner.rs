@@ -556,8 +556,10 @@ pub async fn run_translation_job(
                     // Write to Resource Pack
                     if let Some(pw) = pack_writer.as_mut() {
                         let lang_str = serialize_legacy_lang(&final_map);
-                        let _ = pw.write_entry("assets/betterquesting/lang/ru_ru.lang", lang_str.as_bytes());
-                        let _ = pw.write_entry("assets/betterquesting/lang/ru_RU.lang", lang_str.as_bytes());
+                        let _ = pw.write_entry(&format!("assets/betterquesting/lang/{}.lang", target_lang.file_code), lang_str.as_bytes());
+                        if target_lang.file_code == "ru_ru" {
+                            let _ = pw.write_entry("assets/betterquesting/lang/ru_RU.lang", lang_str.as_bytes());
+                        }
                     }
                 }
             }
