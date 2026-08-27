@@ -1,109 +1,109 @@
-﻿# ModLang — Minecraft Modpack Translator
+﻿# ModLang — Переводчик модпаков Minecraft
 
-High-performance desktop tool for localizing Minecraft mods, quests, and guidebooks into any language.
+Высокопроизводительный десктопный инструмент для локализации модов, квестов и справочников Minecraft на любой язык.
 
-Built with **Tauri v2**, **Rust**, and **React**.
-
----
-
-## Features
-
-- **Broad format support:**
-  - Mods (`.jar`): reads `assets/<mod_id>/lang/en_us.json` and legacy `en_us.lang` (MC 1.12.2 and below)
-  - Quests: FTB Quests (`.snbt`), Better Questing (`DefaultQuests.json`)
-  - Books: Patchouli (JSON + Markdown), Guide-API
-  - Scripts: KubeJS, OpenLoader, Resource Loader configs
-- **Sanitization Engine** — protects variables (`%s`, `{0}`), color codes (`§a`, `&c`), formatting tags (`$(br)`), and unit strings (`RF/t`, `FE`, `mB`) from being corrupted during translation
-- **Multiple translation backends:**
-  - Google Gemini (`gemini-2.5-flash`) with Minecraft-aware context prompt
-  - OpenAI / OpenRouter — compatible with LM Studio, Ollama, KoboldCPP
-  - Google Translate (web) — multithreaded with exponential backoff
-  - DeepL — Free and Pro tiers
-- **Output:** generates valid **Resource Pack** and **Datapack** `.zip` files with correct `pack.mcmeta` for Minecraft 1.7.10 through 1.21.1+. Source `.jar` files are never modified.
-- **Translation cache** — already-translated strings are stored and reused, dramatically speeding up repeated runs across modpacks that share mods.
-- **Minecraft-styled UI** — dark inventory-slot inputs, 3D-bevel buttons, XP bar progress indicator, in-game chat console log.
+Написан на **Tauri v2**, **Rust** и **React**.
 
 ---
 
-## Installation
+## Возможности
 
-Download the latest release from the [Releases](https://github.com/Timon2306/modlang/releases) page:
+- **Поддержка форматов:**
+  - Моды (`.jar`): читает `assets/<mod_id>/lang/en_us.json` и legacy `en_us.lang` (MC 1.12.2 и ниже)
+  - Квесты: FTB Quests (`.snbt`), Better Questing (`DefaultQuests.json`)
+  - Книги и мануалы: Patchouli (JSON + Markdown), Guide-API
+  - Скрипты и конфиги: KubeJS, OpenLoader, Resource Loader
+- **Sanitization Engine** — защищает переменные (`%s`, `{0}`), цветовые коды (`§a`, `&c`), теги форматирования (`$(br)`) и единицы измерения (`RF/t`, `FE`, `mB`) от искажения при переводе
+- **Несколько движков перевода:**
+  - Google Gemini (`gemini-2.5-flash`) с Minecraft-специфичным контекстным промптом
+  - OpenAI / OpenRouter — совместим с LM Studio, Ollama, KoboldCPP
+  - Google Translate (веб) — многопоточный режим с защитой от блокировок
+  - DeepL — Free и Pro тарифы
+- **Результат:** генерирует валидные **Resource Pack** и **Datapack** `.zip` с корректным `pack.mcmeta` для Minecraft 1.7.10 — 1.21.1+. Исходные `.jar` файлы не изменяются.
+- **Кэш переводов** — уже переведённые строки сохраняются и переиспользуются, что значительно ускоряет повторный перевод модпаков с пересекающимися модами.
+- **Интерфейс в стиле Minecraft** — тёмные слоты инвентаря, 3D-кнопки, шкала опыта (XP bar) для отображения прогресса, консоль в виде игрового чата.
 
-| File | Description |
+---
+
+## Установка
+
+Скачай последний релиз со страницы [Releases](https://github.com/Timon2306/modlang-modpack-translator/releases):
+
+| Файл | Описание |
 | :--- | :--- |
-| `ModLang_x.x.x_x64-setup.exe` | NSIS installer (recommended) |
-| `ModLang_x.x.x_x64_en-US.msi` | MSI installer |
-| `modlang_cache_export.7z` | Pre-built translation cache (see below) |
+| `ModLang_x.x.x_x64-setup.exe` | NSIS установщик (рекомендуется) |
+| `ModLang_x.x.x_x64_en-US.msi` | MSI установщик |
+| `modlang_cache_export.7z` | Готовый кэш переводов (см. ниже) |
 
-**Requirements:** Windows 10/11 x64. No additional runtime needed.
-
----
-
-## Pre-built Translation Cache
-
-`modlang_cache_export.7z` contains a community-built cache of pre-translated strings from hundreds of popular Minecraft mods. Strings like item names, tooltips, and UI labels repeat across modpacks — with this cache, ModLang can skip re-translating them and just look up the result instantly.
-
-**To use:**
-1. Extract `modlang_cache_export.7z`
-2. Place `cache.json` next to `settings.json` in the app directory (or wherever your working directory is)
-3. Run ModLang — it will automatically load and extend the cache
+**Требования:** Windows 10/11 x64. Дополнительные зависимости не нужны.
 
 ---
 
-## Configuration
+## Готовый кэш переводов
 
-Copy `settings.example.json` to `settings.json` and fill in your values:
+`modlang_cache_export.7z` содержит кэш уже переведённых строк из сотен популярных Minecraft-модов. Названия предметов, подсказки, интерфейс — они повторяются от модпака к модпаку, и с этим кэшем ModLang просто берёт готовый результат вместо повторного перевода.
+
+**Как использовать:**
+1. Распакуй `modlang_cache_export.7z`
+2. Положи `cache.json` рядом с `settings.json` в рабочую директорию приложения
+3. Запусти ModLang — кэш загрузится автоматически
+
+---
+
+## Настройка
+
+Скопируй `settings.example.json` из репозитория в `settings.json` и заполни нужные поля:
 
 ```json
 {
-  "mc_dir": "C:\\path\\to\\your\\minecraft\\instance",
-  "gemini_api_key": "YOUR_GEMINI_API_KEY",
-  "deepl_key": "YOUR_DEEPL_KEY",
+  "mc_dir": "C:\\путь\\до\\твоего\\minecraft\\инстанса",
+  "gemini_api_key": "ВАШ_КЛЮЧ_GEMINI",
+  "deepl_key": "ВАШ_КЛЮЧ_DEEPL",
   "engine": "google",
   "target_language": "Русский",
   "mc_version": "1.7.10"
 }
 ```
 
-> `settings.json` is listed in `.gitignore` and will never be committed — it stays local only.
+> `settings.json` добавлен в `.gitignore` и никогда не попадёт в репозиторий — он остаётся только локально.
 
-**Getting API keys:**
-- Gemini: [aistudio.google.com](https://aistudio.google.com) — free tier available
-- DeepL: [deepl.com/pro-api](https://www.deepl.com/pro-api) — free tier: 500K chars/month
-- OpenRouter: [openrouter.ai](https://openrouter.ai) — many free models available
+**Где получить API ключи:**
+- Gemini: [aistudio.google.com](https://aistudio.google.com) — есть бесплатный лимит
+- DeepL: [deepl.com/pro-api](https://www.deepl.com/pro-api) — Free: 500 000 символов в месяц
+- OpenRouter: [openrouter.ai](https://openrouter.ai) — много бесплатных моделей
 
 ---
 
-## Building from Source
+## Сборка из исходников
 
-**Requirements:**
+**Требования:**
 - [Node.js](https://nodejs.org/) v18+
-- [Rust & Cargo](https://rustup.rs/) 1.75+
+- [Rust и Cargo](https://rustup.rs/) v1.75+
 
 ```bash
-# Install frontend dependencies
+# Установить зависимости фронтенда
 npm install
 
-# Development mode
+# Запуск в режиме разработки
 npm run tauri dev
 
-# Production build
+# Сборка релизной версии
 npm run tauri build
 ```
 
 ---
 
-## Tech Stack
+## Стек технологий
 
-| Layer | Technology |
+| Слой | Технологии |
 | :--- | :--- |
-| Desktop framework | Tauri v2 |
-| Backend | Rust 2021 — Tokio, Rayon, Reqwest, Serde, Zip |
-| Frontend | React 18, TypeScript, Tailwind CSS, Vite |
-| Cache | Thread-safe JSON |
+| Десктопный фреймворк | Tauri v2 |
+| Бэкенд | Rust 2021 — Tokio, Rayon, Reqwest, Serde, Zip |
+| Фронтенд | React 18, TypeScript, Tailwind CSS, Vite |
+| Кэш | Потокобезопасный JSON |
 
 ---
 
-## License
+## Лицензия
 
-MIT
+MIT — подробнее в файле [LICENSE](LICENSE).
