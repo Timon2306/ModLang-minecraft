@@ -1,0 +1,41 @@
+# Node / Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Rust / Cargo / Tauri
+/src-tauri/target/
+/src-tauri/gen/
+
+# User runtime settings & caches (never commit — may contain API keys and personal paths)
+settings.json
+settings.ini
+cache.json
+ai_cache.json
+dictionary.json
+
+# Generated output directories
+backups_localization/
+resourcepacks/
+output/
+
+# Binary artifacts (distributed via GitHub Releases, not the repo)
+*.exe
+*.msi
+*.7z
+*.zip
+*.tar.gz
+
+# Temp files
+*.tmp
+*.temp
+*.bak
+*.log
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

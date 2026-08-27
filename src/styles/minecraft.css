@@ -1,0 +1,176 @@
+/* Minecraft Modern Dark UI Styles */
+
+:root {
+  --mc-dark-1: #101014;
+  --mc-dark-2: #16161c;
+  --mc-dark-3: #22222a;
+  --mc-dark-4: #2d2d38;
+  
+  --mc-btn-gray-top: #686874;
+  --mc-btn-gray-mid: #4e4e58;
+  --mc-btn-gray-bot: #2c2c34;
+
+  --mc-btn-green-top: #4caf50;
+  --mc-btn-green-mid: #2e7d32;
+  --mc-btn-green-bot: #1b5e20;
+
+  --mc-btn-red-top: #ef5350;
+  --mc-btn-red-mid: #c62828;
+  --mc-btn-red-bot: #8e0000;
+
+  --mc-btn-gold-top: #ffca28;
+  --mc-btn-gold-mid: #b78103;
+  --mc-btn-gold-bot: #785202;
+}
+
+/* Custom Minecraft 3D Bevel Button */
+.mc-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Minecraftia', 'VT323', monospace;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0px #000;
+  background-color: var(--mc-btn-gray-mid);
+  border-top: 2px solid var(--mc-btn-gray-top);
+  border-left: 2px solid var(--mc-btn-gray-top);
+  border-bottom: 2px solid var(--mc-btn-gray-bot);
+  border-right: 2px solid var(--mc-btn-gray-bot);
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15), inset -1px -1px 0px rgba(0, 0, 0, 0.4);
+  transition: all 0.05s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+}
+
+.mc-btn:hover:not(:disabled) {
+  background-color: #5c5c68;
+  border-top-color: #7a7a88;
+  border-left-color: #7a7a88;
+}
+
+.mc-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  border-top: 2px solid var(--mc-btn-gray-bot);
+  border-left: 2px solid var(--mc-btn-gray-bot);
+  border-bottom: 2px solid var(--mc-btn-gray-top);
+  border-right: 2px solid var(--mc-btn-gray-top);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.mc-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(80%);
+}
+
+.mc-btn-green {
+  background-color: var(--mc-btn-green-mid);
+  border-top-color: var(--mc-btn-green-top);
+  border-left-color: var(--mc-btn-green-top);
+  border-bottom-color: var(--mc-btn-green-bot);
+  border-right-color: var(--mc-btn-green-bot);
+}
+.mc-btn-green:hover:not(:disabled) {
+  background-color: #388e3c;
+  border-top-color: #66bb6a;
+  border-left-color: #66bb6a;
+}
+.mc-btn-green:active:not(:disabled) {
+  border-top-color: var(--mc-btn-green-bot);
+  border-left-color: var(--mc-btn-green-bot);
+  border-bottom-color: var(--mc-btn-green-top);
+  border-right-color: var(--mc-btn-green-top);
+}
+
+.mc-btn-red {
+  background-color: var(--mc-btn-red-mid);
+  border-top-color: var(--mc-btn-red-top);
+  border-left-color: var(--mc-btn-red-top);
+  border-bottom-color: var(--mc-btn-red-bot);
+  border-right-color: var(--mc-btn-red-bot);
+}
+.mc-btn-red:hover:not(:disabled) {
+  background-color: #d32f2f;
+  border-top-color: #e57373;
+  border-left-color: #e57373;
+}
+.mc-btn-red:active:not(:disabled) {
+  border-top-color: var(--mc-btn-red-bot);
+  border-left-color: var(--mc-btn-red-bot);
+  border-bottom-color: var(--mc-btn-red-top);
+  border-right-color: var(--mc-btn-red-top);
+}
+
+.mc-btn-gold {
+  background-color: var(--mc-btn-gold-mid);
+  border-top-color: var(--mc-btn-gold-top);
+  border-left-color: var(--mc-btn-gold-top);
+  border-bottom-color: var(--mc-btn-gold-bot);
+  border-right-color: var(--mc-btn-gold-bot);
+}
+
+/* Inventory Slot Bevel */
+.mc-slot {
+  background-color: #101014;
+  border-top: 2px solid #08080a;
+  border-left: 2px solid #08080a;
+  border-bottom: 2px solid #32323c;
+  border-right: 2px solid #32323c;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.mc-slot:focus-within {
+  border-top-color: #0d2812;
+  border-left-color: #0d2812;
+  border-bottom-color: #55FF55;
+  border-right-color: #55FF55;
+  box-shadow: 0 0 8px rgba(85, 255, 85, 0.2);
+}
+
+/* Panel Bevel */
+.mc-panel {
+  background-color: #1a1a20;
+  border-top: 2px solid #2e2e38;
+  border-left: 2px solid #2e2e38;
+  border-bottom: 2px solid #0e0e12;
+  border-right: 2px solid #0e0e12;
+}
+
+/* XP Bar */
+.mc-xp-track {
+  height: 14px;
+  background-color: #0d1e0d;
+  border: 2px solid #060e06;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.mc-xp-fill {
+  height: 100%;
+  background: linear-gradient(180deg, #88ff88 0%, #55FF55 50%, #2e7d32 100%);
+  box-shadow: 0 0 10px #55FF55;
+  transition: width 0.3s ease-out;
+}
+
+/* Custom Pixel Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #101014;
+  border-left: 1px solid #1e1e24;
+}
+::-webkit-scrollbar-thumb {
+  background: #3e3e4a;
+  border-top: 1px solid #5a5a6a;
+  border-left: 1px solid #5a5a6a;
+  border-bottom: 1px solid #26262e;
+  border-right: 1px solid #26262e;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #505060;
+}

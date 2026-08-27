@@ -1,0 +1,40 @@
+[package]
+name = "modlang"
+version = "1.0.0"
+description = "ModLang — Minecraft Modpack Translator"
+authors = ["ModLang Contributors"]
+edition = "2021"
+
+[lib]
+name = "modlang_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.5", features = [] }
+
+[dependencies]
+tauri = { version = "2.2.0", features = [] }
+tauri-plugin-dialog = "2.2.0"
+tauri-plugin-fs = "2.2.0"
+tauri-plugin-shell = "2.2.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["preserve_order"] }
+tokio = { version = "1.38", features = ["full"] }
+tokio-util = "0.7"
+async-trait = "0.1"
+reqwest = { version = "0.12", features = ["json", "gzip", "deflate"] }
+regex = "1.10"
+lazy_static = "1.5"
+zip = { version = "2.2", default-features = false, features = ["deflate"] }
+walkdir = "2.5"
+parking_lot = "0.12"
+rayon = "1.10"
+chrono = "0.4"
+log = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 16
+panic = "abort"
+strip = true
