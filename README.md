@@ -31,6 +31,7 @@
 
 | Файл | Описание |
 | :--- | :--- |
+| `ModLang_x.x.x_x64_Portable.exe` | Портативная версия (не требует установки) |
 | `ModLang_x.x.x_x64-setup.exe` | NSIS установщик (рекомендуется) |
 | `ModLang_x.x.x_x64_en-US.msi` | MSI установщик |
 | `modlang_cache_export.7z` | Готовый кэш переводов (см. ниже) |
@@ -122,3 +123,4 @@ npm run tauri build
 ## Лицензия
 
 MIT — подробнее в файле [LICENSE](LICENSE).
+
