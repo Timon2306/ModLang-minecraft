@@ -43,6 +43,14 @@ pub struct LogEvent {
     pub color: String,
 }
 
+fn to_legacy_caps_code(code: &str) -> String {
+    if let Some((lang, country)) = code.split_once('_') {
+        format!("{}_{}", lang.to_lowercase(), country.to_uppercase())
+    } else {
+        code.to_string()
+    }
+}
+
 pub struct AppState {
     pub config: Arc<RwLock<AppConfig>>,
     pub cache: TranslationCache,
@@ -281,8 +289,9 @@ pub async fn run_translation_job(
                         JarEntryType::LangLegacy => {
                             let lang_str = serialize_legacy_lang(&translated_map);
                             let _ = pw.write_entry(&internal_target_path, lang_str.as_bytes());
-                            if target_lang.file_code == "ru_ru" {
-                                let internal_target_caps = internal_target_path.replace("ru_ru.lang", "ru_RU.lang");
+                            let caps_code = to_legacy_caps_code(&target_lang.file_code);
+                            if caps_code != target_lang.file_code {
+                                let internal_target_caps = internal_target_path.replace(&format!("{}.lang", target_lang.file_code), &format!("{}.lang", caps_code));
                                 let _ = pw.write_entry(&internal_target_caps, lang_str.as_bytes());
                             }
                         }
@@ -382,8 +391,9 @@ pub async fn run_translation_job(
                     if is_lang {
                         let target_path = parent.join(format!("{}.lang", target_lang.file_code));
                         let _ = fs::write(&target_path, serialize_legacy_lang(&final_map));
-                        if target_lang.file_code == "ru_ru" {
-                            let target_path_caps = parent.join("ru_RU.lang");
+                        let caps_code = to_legacy_caps_code(&target_lang.file_code);
+                        if caps_code != target_lang.file_code {
+                            let target_path_caps = parent.join(format!("{}.lang", caps_code));
                             let _ = fs::write(&target_path_caps, serialize_legacy_lang(&final_map));
                         }
                     } else if is_json {
@@ -412,8 +422,9 @@ pub async fn run_translation_job(
 
                     if is_lang {
                         let _ = pw.write_entry(&internal_target, serialize_legacy_lang(&final_map).as_bytes());
-                        if target_lang.file_code == "ru_ru" {
-                            let internal_target_caps = internal_target.replace("ru_ru.lang", "ru_RU.lang");
+                        let caps_code = to_legacy_caps_code(&target_lang.file_code);
+                        if caps_code != target_lang.file_code {
+                            let internal_target_caps = internal_target.replace(&format!("{}.lang", target_lang.file_code), &format!("{}.lang", caps_code));
                             let _ = pw.write_entry(&internal_target_caps, serialize_legacy_lang(&final_map).as_bytes());
                         }
                     } else if is_json {
@@ -547,8 +558,9 @@ pub async fn run_translation_job(
                     if let Some(parent) = bq_path.parent() {
                         let target_path = parent.join(format!("{}.lang", target_lang.file_code));
                         let _ = fs::write(&target_path, serialize_legacy_lang(&final_map));
-                        if target_lang.file_code == "ru_ru" {
-                            let target_path_caps = parent.join("ru_RU.lang");
+                        let caps_code = to_legacy_caps_code(&target_lang.file_code);
+                        if caps_code != target_lang.file_code {
+                            let target_path_caps = parent.join(format!("{}.lang", caps_code));
                             let _ = fs::write(&target_path_caps, serialize_legacy_lang(&final_map));
                         }
                     }
@@ -557,8 +569,9 @@ pub async fn run_translation_job(
                     if let Some(pw) = pack_writer.as_mut() {
                         let lang_str = serialize_legacy_lang(&final_map);
                         let _ = pw.write_entry(&format!("assets/betterquesting/lang/{}.lang", target_lang.file_code), lang_str.as_bytes());
-                        if target_lang.file_code == "ru_ru" {
-                            let _ = pw.write_entry("assets/betterquesting/lang/ru_RU.lang", lang_str.as_bytes());
+                        let caps_code = to_legacy_caps_code(&target_lang.file_code);
+                        if caps_code != target_lang.file_code {
+                            let _ = pw.write_entry(&format!("assets/betterquesting/lang/{}.lang", caps_code), lang_str.as_bytes());
                         }
                     }
                 }
