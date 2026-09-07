@@ -61,5 +61,13 @@ pub fn open_resourcepack_folder_cmd(state: State<'_, Arc<AppState>>) -> Result<(
     {
         let _ = std::process::Command::new("explorer").arg(&path).spawn();
     }
+    #[cfg(target_os = "linux")]
+    {
+        let _ = std::process::Command::new("xdg-open").arg(&path).spawn();
+    }
+    #[cfg(target_os = "macos")]
+    {
+        let _ = std::process::Command::new("open").arg(&path).spawn();
+    }
     Ok(())
 }
