@@ -12,7 +12,7 @@
     "app":  {
                 "windows":  [
                                 {
-                                    "title":  "ModLang вЂ” Minecraft Modpack Translator",
+                                    "title":  "ModLang — Minecraft Modpack Translator",
                                     "width":  1180,
                                     "height":  820,
                                     "minWidth":  960,
@@ -29,6 +29,11 @@
     "bundle":  {
                    "active":  true,
                    "targets":  "all",
+                   "category": "Utility",
+                   "shortDescription": "Minecraft Modpack Translator",
+                   "longDescription": "High-performance tool for localizing Minecraft mods, quests, and guidebooks into any language.",
+                   "copyright": "Copyright 2026 Timon2306",
+                   "license": "MIT",
                    "icon":  [
                                 "icons/32x32.png",
                                 "icons/128x128.png",
