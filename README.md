@@ -27,7 +27,7 @@
 
 ## Установка
 
-Скачай файлы из последнего релиза со страницы [Releases](https://github.com/Timon2306/modlang-modpack-translator/releases):
+Скачай файлы из последнего релиза со страницы [Releases](https://github.com/Timon2306/ModLang-minecraft/releases):
 
 ### Windows:
 | Файл | Описание |
